@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="diseño.css">
+    <title>Buscador Fibonacci</title>
+
+
+
+
+    </form>
+    <br>
+
+    <div class="container" style="border:10 ">
+
+        <form>
+            <p>
+
+                <h1>Fibonacci Crear </h1>
+
+            </p>
+
+            <br>
+            <label for="primero"> </label> Ingresar primer valor:<input type="number" name="primero" id="primero">
+            <br><br>
+            <label for="segundo">Ingresar segundo valor</label>
+            <input type="number" name="segundo" id="segundo">
+
+            <br><br>
+            <label for="maximo">Ingresa el valor maximo</label>
+            <input type="number" name="maximo" id="maximo">
+            <br><br>
+            <label for="valorabuscar">Numero que deseas buscar </label>
+            <input type="number" name="Busqueda" id="Busqueda">
+            <br><br>
+            <input type="button" value="VER TABLA" id="vertabla" onclick="generartabla();">
+            <br><br>
+            <input type="button" value="PARES" id="verpares" onclick="pares();">
+            <br><br>
+            <input type="button" value="IMPARES" id="verimpares" onclick="impar();">
+            <br><br>
+            <input type="button" value="buscar valor" id="Busqueda1" onclick="buscar();">
+            <div>
+                <table id="TablaReserva">
+
+
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+    <script>
+        var generadorNumeros = [];
+
+        function generartabla() {
+            var primero = parseInt(document.getElementById("primero").value);
+            var segundo = parseInt(document.getElementById("segundo").value);
+            var maximo = parseInt(document.getElementById("maximo").value);
+            var a = primero;
+            var b = segundo;
+
+            generadorNumeros.push(primero);
+            generadorNumeros.push(segundo);
+            var resultado;
+            while ((a + b) <= maximo) {
+                resultado = a + b;
+                a = b;
+                b = resultado;
+                generadorNumeros.push(resultado);
+
+            }
+            llenartablanumeros();
+        }
+
+        function llenartablanumeros() {
+
+            var tablar = document.getElementById("TablaReserva");
+            tablar.innerHTML = "";
+            var tblBody = document.createElement("tbody");
+            var i = 0;
+            while (i < generadorNumeros.length) {
+                var elemento = generadorNumeros[i];
+                var hilera = document.createElement("tr");
+
+
+                var celda = document.createElement("td");
+                celda.id = "td" + elemento;
+                var textoCelda = document.createTextNode(elemento);
+                celda.appendChild(textoCelda);
+                hilera.appendChild(celda);
+
+                tblBody.appendChild(hilera);
+
+                i++;
+            }
+            tablar.appendChild(tblBody);
+
+        }
+
+        function pares() {
+
+            var tablar = document.getElementById("TablaReserva");
+            tablar.innerHTML = "";
+            var tblBody = document.createElement("tbody");
+            var i = 0;
+            while (i < generadorNumeros.length) {
+                var elemento = generadorNumeros[i];
+                if (elemento % 2 == 0) {
+                    var hilera = document.createElement("tr");
+
+
+                    var celda = document.createElement("td");
+                    celda.id = "td" + elemento;
+                    var textoCelda = document.createTextNode(elemento);
+                    celda.appendChild(textoCelda);
+                    hilera.appendChild(celda);
+
+                    tblBody.appendChild(hilera);
+                }
+                i++;
+            }
+            tablar.appendChild(tblBody);
+
+        }
+
+        function impar() {
+
+            var tablar = document.getElementById("TablaReserva");
+            tablar.innerHTML = "";
+            var tblBody = document.createElement("tbody");
+            var i = 0;
+            while (i < generadorNumeros.length) {
+                var elemento = generadorNumeros[i];
+                if (elemento % 2 == 1) {
+                    var hilera = document.createElement("tr");
+
+
+                    var celda = document.createElement("td");
+                    celda.id = "td" + elemento;
+                    var textoCelda = document.createTextNode(elemento);
+                    celda.appendChild(textoCelda);
+                    hilera.appendChild(celda);
+
+                    tblBody.appendChild(hilera);
+                }
+                i++;
+            }
+            tablar.appendChild(tblBody);
+
+        }
+
+        function buscar() {
+            var aux = document.getElementById("Busqueda").value;
+            var celdabuscar = document.getElementById("td" + aux);
+            celdabuscar.style.backgroundColor = "yellow";
+
+        }
+    </script>
+
+</html>
